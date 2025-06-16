@@ -16,6 +16,17 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
+        String action = request.getParameter("action");
+
+        // ✅ Si l'action est "clear", on vide la session
+        if ("clear".equals(action)) {
+            HttpSession session = request.getSession();
+            session.invalidate(); // ou session.removeAttribute("users"); uniquement
+            response.sendRedirect("userForm.jsp");
+            return;
+        }
+
+        // ✅ Sinon, on continue avec l'ajout de l'utilisateur
         String nom = request.getParameter("nom");
         String email = request.getParameter("email");
 
