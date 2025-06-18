@@ -1,19 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="model.User" %>
 <%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%
-    User user = (User) session.getAttribute("currentUser");
-    List<User> users = (List<User>) session.getAttribute("users");
 
-    if (user == null || users == null) {
-        response.sendRedirect("userForm.jsp");
-        return;
-    }
-%>
+<c:if test="${empty currentUser or empty users}">
+<c:redirect url="userForm.jsp"/>
+</c:if>
+
+
+
 
 <!DOCTYPE html>
 <html lang="fr">
